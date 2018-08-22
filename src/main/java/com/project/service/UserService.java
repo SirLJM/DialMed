@@ -16,8 +16,7 @@ public class UserService implements IUserService {
 
     @Override
     public User getUserById(long userId) {
-        User obj = userRepository.findById(userId).get();
-        return obj;
+        return userRepository.findById(userId).get();
     }
 
     @Override
@@ -30,7 +29,7 @@ public class UserService implements IUserService {
     @Override
     public synchronized boolean addUser(User user){
         List<User> list = userRepository.findByLastName(user.getLastName());
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             return false;
         } else {
             userRepository.save(user);
